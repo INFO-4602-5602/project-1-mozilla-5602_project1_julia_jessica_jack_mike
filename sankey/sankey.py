@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import holoviews as hv
 from holoviews import opts, dim
+from bokeh.models.mappers import LinearColorMapper
 
 # Set up holoviews extension
 hv.extension('bokeh')
@@ -24,7 +25,7 @@ numResponses = df2.shape[0]
 
 # Lookup table for responses
 savvinessTable = ['Luddite','Average User','Technically Savvy','Ultra Nerd']
-optimismTable = ['Scared as Hell','A Little Wary','On the Fence','Cautiosuly Optomistic','Super Excited!']
+optimismTable = ['Scared as Hell','A Little Wary','On the Fence','Cautiously Optimistic','Super Excited!']
 importances = list(df2)[2:]
 
 fearTable = savvinessTable + optimismTable
@@ -50,6 +51,7 @@ for i in range(4):
         rankEdges.append([i,j+4,count])
 
 choices = ['Fear Level','Importance Rankings']
+jankyCmap = ['#d62728','#1f77b4','#2ca02c','#9467bd','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
 
 # Generate directed acyclic graphs for sankey plots
 def generateGraph(choice):
@@ -61,11 +63,12 @@ def generateGraph(choice):
         sankey = hv.Sankey((rankEdges,rankNodes), ['From','To'], vdims=value_dim)
         sankey.opts(title='How Tech Savviness Influences ')
     sankey.opts(labels='label',
-                width=1200,
+                width=1000,
                 height=900,
-                cmap='Set1',
+                cmap=jankyCmap,
                 edge_color=dim('From').str(),
-                fontsize={'title': 18, 'labels': 16})
+                fontsize={'title': 18, 'labels': 16},
+                node_hover_fill_color='grey')
     return sankey
 
 # Create Holomap
