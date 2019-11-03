@@ -14,4 +14,4 @@ Design process:
 - Development
 	- we'll work in google drive for most of our communications and updates
 	- github for code 
-	- We'll use Bokeh and python
+	- We'll use Bokeh and python :)
