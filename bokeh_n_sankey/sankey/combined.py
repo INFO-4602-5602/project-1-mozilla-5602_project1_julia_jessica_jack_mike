@@ -353,7 +353,7 @@ for i in range(4):
         rankEdges.append([i,j+4,count])
 
 choices = ['Fear Level','Importance Rankings']
-jankyCmap = ['#d62728','#1f77b4','#2ca02c','#9467bd','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
+jankyCmap = ['#c7e9c0','#a1d99b','#74c476','#31a354','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
 
 from bokeh.layouts import widgetbox
 from bokeh.models.widgets import Select
