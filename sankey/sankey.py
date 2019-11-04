@@ -11,7 +11,7 @@ from bokeh.models import HoverTool
 hv.extension('bokeh')
 
 # Load Survey data into Panas Dataframe
-surveyData = pd.read_pickle('../Survey_Results_Clean.pkl')
+surveyData = pd.read_csv('../Survey_Results_Clean_UTF8.csv')
 
 # Grab Tech Savviness and Future outlook columns
 df2 = surveyData[['Tech Savviness','Feelings about Future',
