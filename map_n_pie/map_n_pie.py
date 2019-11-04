@@ -27,7 +27,7 @@ string_reps_abrev = {'1': 'Scared as hell.',
                '5': 'Super excited!'}
 import pandas as pd
 # Load Survey data into Panas Dataframe
-surveyData = pd.read_csv('Survey_Results_Clean_UTF8.csv')
+surveyData = pd.read_csv('../Survey_Results_Clean_UTF8.csv')
 
 data_dict = {}
 for country in surveyData['Country or Region'].unique():
@@ -47,7 +47,7 @@ for country in surveyData['Country or Region'].unique():
     else:
         print(country, ' mode response came back empty')
 ##    break
-# --------- end of 
+# --------- end of
 
 shapefile = 'countries_110m/ne_110m_admin_0_countries.shp'
 #Read shapefile using Geopandas
@@ -92,7 +92,7 @@ for ct in data_dict.keys():
     if ct == 'United States':
         bg = ['United States of America']
         new_data_dict[bg[0]] = new_data_dict.pop(ct)
-        
+
     if ct == bg[0]: # this is dumb I don't actually add any
         new_data_dict[bg[0]] = new_data_dict.pop(ct) # replace the medium data key with the new country key
     else:
@@ -104,7 +104,7 @@ for ct in data_dict.keys():
 ##        print('MULTIPLES       ',ct, bg, score)
 ##    else:
 ##        print(ct, ' No match')
-        
+
 ndf = pd.concat([df['entity'],df['code']],axis=1)
 ndf.drop_duplicates()
 
@@ -127,7 +127,7 @@ for v in range(len(new_data_dict.values())):
     except IndexError:
         new_data_dict.pop(entitiesL[v])
         pop_list.append(v)
-        
+
 ##        print(entitiesL[v],' fail')
         pass
 #######
@@ -152,7 +152,7 @@ singe_ramp = ['#bd0026','#f03b20','#fd8d3c','#fecc5c','#ffffb2'] # red to yellow
 singe_ramp_red = ['#a50f15','#de2d26','#fb6a4a','#fcae91','#fee5d9']
 
 # doverging color ramp fear based color mapping
-diverging_ramp = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641'] 
+diverging_ramp = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641']
 
 palette = singe_ramp_red
 ##palette = diverging_ramp
@@ -192,7 +192,7 @@ def pie_dat(data):
     data['color'] = singe_ramp_red
     ndata = {}
     for c in range(len(data.columns.to_list())):
-        ndata[data.columns[c]]=data[data.columns[c]].to_list()  
+        ndata[data.columns[c]]=data[data.columns[c]].to_list()
     return ndata
 
 # add pie data to the new_data_dict
@@ -210,7 +210,7 @@ for k in list(new_data_dict.keys()):
     try:
         if math.isnan(k): pop_list.append(k)
     except TypeError: pass
-        
+
 for k in pop_list:
     new_data_dict.pop(k)
 
@@ -237,7 +237,7 @@ def json_data(selectedYear):
             merged.mode_fear_response[ii] = 'No data'
 ##            print(merged.mode_fear_response[ii])
         ii += 1
-            
+
     inds = merged['country_code'].tolist()
 ##    merged.fillna('No data', inplace = True)
     merged_json = json.loads(merged.to_json())
@@ -245,7 +245,7 @@ def json_data(selectedYear):
 ##    for c in merged.country.to_list():
 ##        merged[merged.country==c].geometry.type == 'Polygon'
 
-    
+
     json_data = json.dumps(merged_json)
     return json_data
 
@@ -267,7 +267,7 @@ code="""
     source.change.emit();
 
 
-    
+
     }
 
 """
@@ -279,9 +279,9 @@ code="""
 
 ##    p3.plot_height = 150;
 ##    p3.document.resize_layout();
-    
+
 ##from bokeh.models import LabelSet
-#######pie 
+#######pie
 p3 = figure(plot_height=int(2*350/3), title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 p3.min_border_right = 100
@@ -318,7 +318,7 @@ tick_labels = {'1': string_reps_abrev['1'], '2': string_reps_abrev['2'], '3':str
 hover = HoverTool(callback = hover_callback, tooltips = [ ('Country','@country'),('Mode response: ', '@mode_fear_response')])
 ##hover = HoverTool(tooltips = [ ('Country/region','@country'),('Mode response:', '@per_cent_obesity')])
 
-#Create color bar. 
+#Create color bar.
 color_bar = ColorBar(color_mapper=color_mapper, label_standoff=8,width = 500, height = 20,
                      border_line_color=None,location = (100,0), orientation = 'horizontal', major_label_overrides = tick_labels)
 ##color_bar = ColorBar(color_mapper=color_mapper, label_standoff=8,width = 300, height = 20,formatter=formatter,
@@ -328,7 +328,7 @@ p = figure(title = 'Patterns of fear and know-how around the world', plot_height
 p.xgrid.grid_line_color = None
 p.ygrid.grid_line_color = None
 p.axis.visible=False
-#Add patch renderer to figure. 
+#Add patch renderer to figure.
 p.patches('xs','ys', source = geosource,fill_color = {'field' :'mode_fear_response', 'transform' : color_mapper},
           line_color = 'black', line_width = 0.25, fill_alpha = 1)
 #Specify layout
@@ -343,8 +343,8 @@ def update_plot(attr, old, new):
     new_data = json_data(yr)
     geosource.geojson = new_data
     p.title.text = 'Share of adults who are obese, %d' %yr
-    
-# Make a slider object: slider 
+
+# Make a slider object: slider
 slider = Slider(title = 'Year',start = 1975, end = 2016, step = 1, value = 2016)
 slider.on_change('value', update_plot)
 # Make a column layout of widgetbox(slider) and plot, and add it to the current document
