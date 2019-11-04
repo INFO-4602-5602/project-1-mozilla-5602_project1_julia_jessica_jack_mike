@@ -63,23 +63,23 @@ select = Select(title="Option:", value="Fear Level", options=["Fear Level", "Imp
 ##source2 = ColumnDataSource({'fearEdges':fearEdges,'fearNodes':fearNodes})
 sdata = (fearEdges,fearNodes)
 
-
 # Generate directed acyclic graphs for sankey plots
 def generateGraph(choice):
     value_dim = hv.Dimension('Percentage', unit='%')
     if choice == 'Fear Level':
         sankey = hv.Sankey((fearEdges,fearNodes), ['From','To'], vdims=value_dim)
-        sankey.opts(title='How Tech Savviness Influences Fear of Connectivity')
+        sankey.opts(title='How Tech Savviness Influences\nFeelings About a Connect Future')
     elif choice == 'Importance Rankings':
         sankey = hv.Sankey((rankEdges,rankNodes), ['From','To'], vdims=value_dim)
-        sankey.opts(title='How Tech Savviness Influences ')
+        sankey.opts(title='How Tech Savviness Influences\nPurchase Features')
     sankey.opts(labels='label',
                 width=int(1000/1.5),
                 height=int(900/1.5),
                 cmap=jankyCmap,
                 edge_color=dim('From').str(),
                 fontsize={'title': 18, 'labels': 16},
-                node_hover_fill_color='grey'
+                node_hover_fill_color='grey',
+                toolbar=None
                 )
     return sankey
 
