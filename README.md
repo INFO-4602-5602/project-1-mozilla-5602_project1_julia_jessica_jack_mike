@@ -1,4 +1,12 @@
 ### README
+https://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/bokeh_n_sankey/sankey/combss111.html
+
+Viz 1 
+https://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/tech-savy-fears.html
+
+Viz 2
+https://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/world-wide-tech-fears.html
+
 
 Design process:
 - brain storming
@@ -14,4 +22,4 @@ Design process:
 - Development
 	- we'll work in google drive for most of our communications and updates
 	- github for code 
-	- We'll use Bokeh and python
+	- We'll use Bokeh and python :)
