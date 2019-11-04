@@ -4,7 +4,7 @@ import pandas as pd
 import holoviews as hv
 from holoviews import opts, dim
 from bokeh.models.mappers import LinearColorMapper
-from bokeh.io import output_file, save, show
+from bokeh.models import HoverTool
 
 
 # Set up holoviews extension
@@ -43,50 +43,51 @@ for i in range(4):
     for j in range(5):
         count = df2[df2['Tech Savviness'] == i+1]
         count = 100 * count[count['Feelings about Future'] == j+1].shape[0] / float(numResponses)
-        fearEdges.append([i,j+4,count])
+        fearEdges.append((i,j+4,count))
 
 rankEdges = []
 for i in range(4):
     for j in range(10):
         count = df2[df2['Tech Savviness'] == i+1]
         count = 100 * count[count[importances[j]] == 1].shape[0] / float(numResponses)
-        rankEdges.append([i,j+4,count])
+        rankEdges.append((i,j+4,count))
 
 choices = ['Fear Level','Importance Rankings']
-##jankyCmap = ['#c7e9c0','#a1d99b','#74c476','#31a354','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
-jankyCmap = ['#006d2c','#31a354','#74c476','#bae4b3','#edf8e9','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
+jankyCmap = ['#a1dab4','#41b6c4','#2c7fb8','#253494','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
 
-from bokeh.layouts import widgetbox
-from bokeh.models.widgets import Select
-select = Select(title="Option:", value="Fear Level", options=["Fear Level", "Importance Rankings"],width=200)
-
-##source2 = ColumnDataSource({'fearEdges':fearEdges,'fearNodes':fearNodes})
-sdata = (fearEdges,fearNodes)
+hover = HoverTool(
+        tooltips=[
+            ("Percentage", "@Percentage{%0.2f%%}")
+        ],
+        formatters={
+            'Percentage' : 'printf'
+        },
+    )
 
 # Generate directed acyclic graphs for sankey plots
 def generateGraph(choice):
     value_dim = hv.Dimension('Percentage', unit='%')
     if choice == 'Fear Level':
         sankey = hv.Sankey((fearEdges,fearNodes), ['From','To'], vdims=value_dim)
-        sankey.opts(title='How Tech Savviness Influences\nFeelings About a Connect Future')
+        #sankey = hv.Sankey([(fearTable[i],fearTable[j],k) for i,j,k in fearEdges], ['From','To'], vdims=value_dim)
+        sankey.opts(title='How Tech Savviness Influences Feelings about Connectivity')
     elif choice == 'Importance Rankings':
         sankey = hv.Sankey((rankEdges,rankNodes), ['From','To'], vdims=value_dim)
-        sankey.opts(title='How Tech Savviness Influences\nPurchase Features')
+        #sankey = hv.Sankey([(rankTable[i],rankTable[j],k) for i,j,k in rankEdges], ['From','To'], vdims=value_dim)
+        sankey.opts(title='How Tech Savviness Influences Priorities when Purchasing New Devices')
     sankey.opts(labels='label',
-                width=int(1000/1.5),
-                height=int(900/1.5),
+                width=1000,
+                height=900,
                 cmap=jankyCmap,
                 edge_color=dim('From').str(),
                 fontsize={'title': 18, 'labels': 16},
                 node_hover_fill_color='grey',
-                toolbar=None
-                )
+                tools=[hover])
     return sankey
 
 # Create Holomap
 dag_dict = {c:generateGraph(c) for c in choices}
 hmap = hv.HoloMap(dag_dict, kdims='Metric')
 
-
-renderer = hv.renderer('bokeh')
-renderer.save(hmap,'tech-savvy-feelings')
+# Save html file
+hv.save(hmap,'sankey.html')
