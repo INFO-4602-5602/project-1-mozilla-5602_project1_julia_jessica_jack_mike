@@ -4,6 +4,8 @@ import pandas as pd
 import holoviews as hv
 from holoviews import opts, dim
 from bokeh.models.mappers import LinearColorMapper
+from bokeh.io import output_file, save, show
+
 
 # Set up holoviews extension
 hv.extension('bokeh')
@@ -51,7 +53,16 @@ for i in range(4):
         rankEdges.append([i,j+4,count])
 
 choices = ['Fear Level','Importance Rankings']
-jankyCmap = ['#d62728','#1f77b4','#2ca02c','#9467bd','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
+##jankyCmap = ['#c7e9c0','#a1d99b','#74c476','#31a354','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
+jankyCmap = ['#006d2c','#31a354','#74c476','#bae4b3','#edf8e9','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
+
+from bokeh.layouts import widgetbox
+from bokeh.models.widgets import Select
+select = Select(title="Option:", value="Fear Level", options=["Fear Level", "Importance Rankings"],width=200)
+
+##source2 = ColumnDataSource({'fearEdges':fearEdges,'fearNodes':fearNodes})
+sdata = (fearEdges,fearNodes)
+
 
 # Generate directed acyclic graphs for sankey plots
 def generateGraph(choice):
@@ -63,17 +74,19 @@ def generateGraph(choice):
         sankey = hv.Sankey((rankEdges,rankNodes), ['From','To'], vdims=value_dim)
         sankey.opts(title='How Tech Savviness Influences ')
     sankey.opts(labels='label',
-                width=1000,
-                height=900,
+                width=int(1000/1.5),
+                height=int(900/1.5),
                 cmap=jankyCmap,
                 edge_color=dim('From').str(),
                 fontsize={'title': 18, 'labels': 16},
-                node_hover_fill_color='grey')
+                node_hover_fill_color='grey'
+                )
     return sankey
 
 # Create Holomap
 dag_dict = {c:generateGraph(c) for c in choices}
 hmap = hv.HoloMap(dag_dict, kdims='Metric')
 
-# Save html file
-hv.save(hmap,'sankey.html')
+
+renderer = hv.renderer('bokeh')
+renderer.save(hmap,'tech-savvy-feelings')
