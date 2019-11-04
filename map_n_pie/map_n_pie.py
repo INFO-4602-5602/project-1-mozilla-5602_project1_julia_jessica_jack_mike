@@ -148,12 +148,13 @@ code_name['code'] = replace_dat['code']
 ##palette = palette[::-1]
 
 # single color ramp fear based color mapping
-singe_ramp = ['#bd0026','#f03b20','#fd8d3c','#fecc5c','#ffffb2'] 
+singe_ramp = ['#bd0026','#f03b20','#fd8d3c','#fecc5c','#ffffb2'] # red to yellow/white
+singe_ramp_red = ['#a50f15','#de2d26','#fb6a4a','#fcae91','#fee5d9']
 
 # doverging color ramp fear based color mapping
 diverging_ramp = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641'] 
 
-palette = singe_ramp
+palette = singe_ramp_red
 ##palette = diverging_ramp
 
 cdkeys = code_name['entity'].tolist()
@@ -188,7 +189,7 @@ def pie_dat(data):
     data = pd.Series(data).reset_index(name='value').rename(columns={'index':'country'})
     data['angle'] = data['value']/data['value'].sum() * 2*pi
 ##    data['color'] = Category20c[len(data)]
-    data['color'] = diverging_ramp
+    data['color'] = singe_ramp_red
     ndata = {}
     for c in range(len(data.columns.to_list())):
         ndata[data.columns[c]]=data[data.columns[c]].to_list()  
@@ -283,14 +284,11 @@ code="""
 #######pie 
 p3 = figure(plot_height=int(2*350/3), title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
-
+p3.min_border_right = 100
 p3.wedge(x=0, y=1, radius=0.2,
          start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
          line_color="white", fill_color='color', legend='country', source=source)
 
-##labels = LabelSet(x=0, y=1, text='value', level='glyph',
-##        angle=cumsum('angle', include_zero=True), source=source)
-##p3.add_layout(labels)
 
 p3.axis.axis_label=None
 p3.axis.visible=False
@@ -354,12 +352,15 @@ slider.on_change('value', update_plot)
 
 from bokeh.io import output_file, save, show
 
+from bokeh.models.widgets import Select
+
+select = Select(title="Metric:", value="Fear Level", options=["Fear Level","Tech Savviness"],width=300)
 
 
 from bokeh.models import Div
 
 title_style = {'font-size': '150%', 'color': '#bd0026','text-align': 'center','padding':'0px 0px'}
-layout = gridplot([[Div(text="<b>Is ignorance bliss?: How tech savviness shapes fears about a more connected future.</b>", style=title_style)],[p,p3]])
+layout = gridplot([[Div(text="<b>Is ignorance bliss?: How tech savviness shapes fears about a more connected future.</b>", style=title_style)],[p,column(p3,select)]])
 
 ##layout = gridplot([[p,p3],[sank_plot, None]])
 ##layout = gridplot([[p,p3],[sankey, None]])
