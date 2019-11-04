@@ -1,10 +1,8 @@
 ### README
 
-Viz 1 
-http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/sankey/sankey.html
+[Viz 1](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/sankey.html)
 
-Viz 2
-http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html
+[Viz 2](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/world-wide-feelings.html)
 
 
 Design process:
