@@ -14,7 +14,10 @@ In August 2017, Mozilla published a survey that aimed to take stock of the globe
 
 <h2>Team Roles </h2>
 Mike: Designer/coder<br>
-
+Iterated geomap visualizations, brainstormed functionality tool feasibility.
+<br>Generated country code matching data parser.
+<br>Wrote CustomJS callbacks for viz-to-viz interactions. 
+<br>Worked on github docs.
 
 <br>Jack: Designer/coder<br>
 Reorganized and reformatted dataset into more efficient format for parsing and generating plots.
