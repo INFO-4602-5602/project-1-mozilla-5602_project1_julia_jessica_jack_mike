@@ -52,7 +52,7 @@ for i in range(4):
         count = 100 * count[count[importances[j]] == 1].shape[0] / float(numResponses)
         rankEdges.append((i,j+4,count))
 
-choices = ['Fear Level','Importance Rankings']
+choices = ['Feelings about Future','Importance Rankings']
 jankyCmap = ['#a1dab4','#41b6c4','#2c7fb8','#253494','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696','#969696']
 
 hover = HoverTool(
@@ -67,7 +67,7 @@ hover = HoverTool(
 # Generate directed acyclic graphs for sankey plots
 def generateGraph(choice):
     value_dim = hv.Dimension('Percentage', unit='%')
-    if choice == 'Fear Level':
+    if choice == 'Feelings about Future':
         sankey = hv.Sankey((fearEdges,fearNodes), ['From','To'], vdims=value_dim)
         #sankey = hv.Sankey([(fearTable[i],fearTable[j],k) for i,j,k in fearEdges], ['From','To'], vdims=value_dim)
         sankey.opts(title='How Tech Savviness Influences Feelings about Connectivity')
