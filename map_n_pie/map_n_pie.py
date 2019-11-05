@@ -372,20 +372,67 @@ geosource = GeoJSONDataSource(geojson = json_data(2016))
 
 code="""
     console.log(select.value);
+    try{
     if (cb_data.index.indices != null) {
-    hovered_index = cb_data.index.indices[0];
-    if (select.value == "Fear Level"){
-    title.text = new_data_dict[inds[hovered_index]][3]+", response distribution"
-    source.data = new_data_dict[inds[hovered_index]][2];
-    };
-    if (select.value == "Tech Savviness"){
-    title.text = new_savvy_dict[inds[hovered_index]][3]+", response distribution"
-    source.data = new_savvy_dict[inds[hovered_index]][2];
-    };
-    source.change.emit();    
+        ind_hold = cb_data.index.indices[0];
+        hovered_index = ind_hold;
+        if (select.value == "Fear Level"){
+            title.text = new_data_dict[inds[hovered_index]][3]+", response distribution"
+            source.data = new_data_dict[inds[hovered_index]][2];
+        };
+        if (select.value == "Tech Savviness"){
+            title.text = new_savvy_dict[inds[hovered_index]][3]+", response distribution"
+            source.data = new_savvy_dict[inds[hovered_index]][2];
+        };
+        source.change.emit();    
     }
-
+    }
+    catch(err){
+        console.log('caught error');
+        hovered_index = ind_hold;
+        if (select.value == "Fear Level"){
+            title.text = new_data_dict[inds[hovered_index]][3]+", response distribution"
+            source.data = new_data_dict[inds[hovered_index]][2];
+        };
+        if (select.value == "Tech Savviness"){
+            title.text = new_savvy_dict[inds[hovered_index]][3]+", response distribution"
+            source.data = new_savvy_dict[inds[hovered_index]][2];
+        };
+        source.change.emit(); 
+    }
 """
+##code="""
+##    console.log(select.value);
+##    try{
+##        if (cb_data.index.indices != null) {
+##            ind_hold = cb_data.index.indices[0];
+##            hovered_index = ind_hold;
+##            if (select.value == "Fear Level"){
+##                title.text = new_data_dict[inds[hovered_index]][3]+", response distribution"
+##                source.data = new_data_dict[inds[hovered_index]][2];
+##            };
+##            if (select.value == "Tech Savviness"){
+##                title.text = new_savvy_dict[inds[hovered_index]][3]+", response distribution"
+##                source.data = new_savvy_dict[inds[hovered_index]][2];
+##            };
+##            source.change.emit();    
+##        }
+##    }
+##    catch(err){
+##        hovered_index = ind_hold;
+##        if (select.value == "Fear Level"){
+##            title.text = new_data_dict[inds[hovered_index]][3]+", response distribution"
+##            source.data = new_data_dict[inds[hovered_index]][2];
+##        };
+##        if (select.value == "Tech Savviness"){
+##            title.text = new_savvy_dict[inds[hovered_index]][3]+", response distribution"
+##            source.data = new_savvy_dict[inds[hovered_index]][2];
+##        };
+##           
+##    }
+##    source.change.emit(); 
+##
+##"""
 
 ##from bokeh.models import LabelSet
 #######pie
@@ -402,8 +449,9 @@ p3.axis.visible=False
 p3.grid.grid_line_color = None
 p3.title.text_font_size = '18pt'
 #######pie
-
-hover_callback = CustomJS(args=dict(x=x,source=source,new_data_dict=new_data_dict,inds=inds,title=p3.title, select=select,new_savvy_dict=new_savvy_dict), code = code)
+ind_hold = 3
+hover_callback = CustomJS(args=dict(x=x,source=source,new_data_dict=new_data_dict,inds=inds,title=p3.title, select=select,new_savvy_dict=new_savvy_dict,ind_hold=ind_hold), code = code)
+select.js_on_change('value',hover_callback)
 
 from bokeh.models import FixedTicker, FuncTickFormatter
 ##hover_callback = CustomJS(args=dict(x=x,new_data_dict=new_data_dict,inds=inds), code = code)
@@ -427,7 +475,7 @@ color_mapper = LinearColorMapper(palette = palette, low = 0, high = 20, nan_colo
 tick_labels = {'0': '0%',  '5': '5%','10': '10%',  '15': '15%','20':'20%'}
 
 #Add hover tool
-hover = HoverTool(callback = hover_callback, tooltips = [ ('Country','@country'),("Responsed 'Scared as hell!': ", '@mode_fear_response'+' %')])
+hover = HoverTool(callback = hover_callback, tooltips = [ ('Country','@country'),("Responded 'Scared as hell!': ", '@mode_fear_response'+' %')])
 ##hover = HoverTool(tooltips = [ ('Country/region','@country'),('Mode response:', '@per_cent_obesity')])
 
 #Create color bar.
@@ -456,9 +504,9 @@ from bokeh.io import output_file, save, show
 
 from bokeh.models import Div
 
-##title_style = {'font-size': '150%', 'color': '#bd0026','text-align': 'center','padding':'0px 0px'}
-##titleee = Div(text="<b>Is ignorance bliss?: How tech savviness shapes fears about a more connected future.</b>", style=title_style)
-layout = gridplot([[p,column(p3,select)]])
+title_style = {'font-size': '110%', 'color': 'black','text-align': 'center','padding':'0px 110px'}
+titleee = Div(text="<b>Percent of responses that were 'scared as hell!'</b>", style=title_style)
+layout = gridplot([[p,column(p3,select)],[titleee]])
 
 
 output_file("world-wide-feelings.html")
