@@ -12,7 +12,7 @@ from bokeh.models import CustomJS, ColumnDataSource
 from math import pi
 import copy
 import math
-
+import bokeh
 
 # --------- my data loading and prep
 string_reps = {'1': 'Scared as hell. The future where everything is connected has me scared senseless. Were all doomed!',
@@ -38,13 +38,18 @@ data_dict = {}
 for country in surveyData['Country or Region'].unique():
     d = surveyData.loc[surveyData['Country or Region']==country,'Feelings about Future']
 ##    print(country,' mode:',d.mode())
+    tot_responds = sum(list(d.value_counts()))
     if len(d.value_counts()) > 0:
-        if d.value_counts().index[0] != 0:
-##            print(country,' mode response: ',string_reps[str(d.value_counts().index[0])])
-            mr = d.value_counts().index[0] # storing in numeric encoding
-        else:
-##            print(country,' mode response: ',string_reps[str(d.value_counts().index[1])])
-            mr = d.value_counts().index[0] # storing in numeric encoding
+        try:
+            if d.value_counts().index[0] != 0:
+    ##            print(country,' mode response: ',string_reps[str(d.value_counts().index[0])])
+    ##            mr = d.value_counts().index[0] # storing in numeric encoding
+                mr = int(d.value_counts()[1]/tot_responds*100) # storing % of total reponse 
+            else:
+    ##            print(country,' mode response: ',string_reps[str(d.value_counts().index[1])])
+    ##            mr = d.value_counts().index[0] # storing in numeric encoding
+                mr = int(d.value_counts()[1]/tot_responds*100) # storing % of total reponse
+        except KeyError: mr = 0 # no scared as hell responses
         data_dict[country] = [mr, {}]
         for i in d.value_counts().index:
             if i != 0:
@@ -116,7 +121,7 @@ for ct in data_dict.keys():
         bg = ['United States of America']
         new_data_dict[bg[0]] = new_data_dict.pop(ct)
 
-    if ct == bg[0]: # this is dumb I don't actually add any
+    if ct == bg[0]: 
         new_data_dict[bg[0]] = new_data_dict.pop(ct) # replace the medium data key with the new country key
     else:
         if ct != 'United States':
@@ -215,13 +220,22 @@ scode_name['code'] = sreplace_dat['code']
 # single color ramp fear based color mapping
 singe_ramp = ['#bd0026','#f03b20','#fd8d3c','#fecc5c','#ffffb2'] # red to yellow/white
 singe_ramp_red = ['#a50f15','#de2d26','#fb6a4a','#fcae91','#fee5d9']
+granular_ramp_red = ['#fff5f0','#fee0d2','#fcbba1','#fc9272','#fb6a4a','#ef3b2c','#cb181d','#a50f15','#67000d']
+granular_ramp_red.reverse()
 
-single_ramp_grn = ['#006d2c', '#31a354','#74c476','#bae4b3']
+##single_ramp_grn = ['#006d2c', '#31a354','#74c476','#bae4b3']
+single_ramp_blue = ['#a1dab4','#41b6c4','#2c7fb8','#253494']
+single_ramp_blue.reverse()
+
+ts_palette = single_ramp_blue
 
 # doverging color ramp fear based color mapping
 diverging_ramp = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641']
 
-palette = singe_ramp_red
+##palette = granular_ramp_red
+palette = bokeh.palettes.all_palettes['Inferno'][256]
+palette.reverse()
+palette = palette[int(len(palette)/5):int(3*len(palette)/5)]
 ##palette = diverging_ramp
 
 cdkeys = code_name['entity'].tolist()
@@ -278,10 +292,11 @@ def pie_dat(data):
     data['angle'] = data['value']/data['value'].sum() * 2*pi
 ##    if flag: print('len values',len(data.country.to_list()))
     if len(data.country.to_list()) == 4:
-        data['color'] = single_ramp_grn
+        data['color'] = ts_palette
     else:
 ##        print(data)
-        data['color'] = singe_ramp_red
+##        data['color'] = singe_ramp_red
+        data['color'] = diverging_ramp
 
     ndata = {}
     for c in range(len(data.columns.to_list())):
@@ -374,10 +389,10 @@ code="""
 
 ##from bokeh.models import LabelSet
 #######pie
-p3 = figure(plot_height=int(2*350/3), title="Pie Chart", toolbar_location=None,
+p3 = figure(plot_height=int(350), title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 p3.min_border_right = 100
-p3.wedge(x=0, y=1, radius=0.2,
+p3.wedge(x=0, y=1, radius=0.3,
          start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
          line_color="white", fill_color='color', legend='country', source=source)
 
@@ -385,7 +400,7 @@ p3.wedge(x=0, y=1, radius=0.2,
 p3.axis.axis_label=None
 p3.axis.visible=False
 p3.grid.grid_line_color = None
-p3.title.text_font_size = '14pt'
+p3.title.text_font_size = '18pt'
 #######pie
 
 hover_callback = CustomJS(args=dict(x=x,source=source,new_data_dict=new_data_dict,inds=inds,title=p3.title, select=select,new_savvy_dict=new_savvy_dict), code = code)
@@ -395,7 +410,10 @@ from bokeh.models import FixedTicker, FuncTickFormatter
 ##print('ahsdflasfd')
 
 #Instantiate LinearColorMapper that linearly maps numbers in a range, into a sequence of colors. Input nan_color.
-color_mapper = LinearColorMapper(palette = palette, low = 0.5, high = 5.5, nan_color = '#d9d9d9')
+##color_mapper = LinearColorMapper(palette = palette, low = 0.5, high = 5.5, nan_color = '#d9d9d9')
+color_mapper = LinearColorMapper(palette = palette, low = 0, high = 20, nan_color = '#d9d9d9')
+##color_mapper = LinearColorMapper(palette = [palette[0],palette[-1]], low = 0, high = 25, nan_color = '#d9d9d9')
+##LinearColorMapper(palette=Viridis256, low=0, high=100)
 
 #Define custom tick labels for color bar.
 ##ticker = FixedTicker(ticks=[1.5,2.5,3.5,4.5,5.5])
@@ -406,10 +424,10 @@ color_mapper = LinearColorMapper(palette = palette, low = 0.5, high = 5.5, nan_c
 ##}
 ##""")
 
-tick_labels = {'1': string_reps_abrev['1'], '2': string_reps_abrev['2'], '3':string_reps_abrev['3'], '4':string_reps_abrev['4'], '5':string_reps_abrev['5']}
+tick_labels = {'0': '0%',  '5': '5%','10': '10%',  '15': '15%','20':'20%'}
 
 #Add hover tool
-hover = HoverTool(callback = hover_callback, tooltips = [ ('Country','@country'),('Mode response: ', '@mode_fear_response')])
+hover = HoverTool(callback = hover_callback, tooltips = [ ('Country','@country'),("Responsed 'Scared as hell!': ", '@mode_fear_response'+' %')])
 ##hover = HoverTool(tooltips = [ ('Country/region','@country'),('Mode response:', '@per_cent_obesity')])
 
 #Create color bar.
@@ -429,7 +447,7 @@ p.patches('xs','ys', source = geosource,fill_color = {'field' :'mode_fear_respon
 
 #Specify layout
 p.add_layout(color_bar, 'below')
-p.title.text_font_size = '14pt'
+p.title.text_font_size = '18pt'
 
 
 
