@@ -18,21 +18,21 @@ Mike: Designer/coder<br>
 
 Jack: Designer/coder<br>
 Reorganized and reformatted dataset into more efficient format for parsing and generating plots
-Wrote code for holoviews Sankey plot, including custom Bokeh colormap and tooltip.
-Produced several iterations of the Sankey plot.
-Organized holoviews-generated html files to be hosted on github.io for ease of viewing.
+<br>Wrote code for holoviews Sankey plot, including custom Bokeh colormap and tooltip.
+<br>Produced several iterations of the Sankey plot.
+<br>Organized holoviews-generated html files to be hosted on github.io for ease of viewing.
 
 Jess: Designer/writer<br>
 Sketched three prototype visualizations
-Modeled several iterations of maps with pie charts in Tableau
-Wrote and edited content for Readme
-Gave feedback on iterations of visualizations
+<br>Modeled several iterations of maps with pie charts in Tableau
+<br>Wrote and edited content for Readme
+<br>Gave feedback on iterations of visualizations
 
 Julia: Designer/writer<br>
 Sketched out three prototype visualizations.
-Modeled a map visualization in Tableau 
-Gave feedback on iterations of visualizations
-Wrote and edited content for Readme
+<br>Modeled a map visualization in Tableau 
+<br>Gave feedback on iterations of visualizations
+<br>Wrote and edited content for Readme
 
 
 
