@@ -12,7 +12,7 @@ In August 2017, Mozilla published a survey that aimed to take stock of the globe
 
 [World Map](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
 
-<h2>Team Roles: </h2>
+<h2>Team Roles </h2>
 Mike: Designer/coder<br>
 
 Jack: Designer/coder<br>
@@ -37,7 +37,7 @@ Sketched out three prototype visualizations.
 
 
 
-<h2>Design Process:</h2>
+<h2>Design Process</h2>
 1. After reviewing the dataset and article, we decided upon a research question: does someone’s technological savviness influence their feelings and attitudes towards the future of a connected world? We then identified some tasks that a potential user of the visualizations would use to explore this research question.
 <br>2. We individually brainstormed two to three visualizations on paper, ranging from safe and realistic concepts to ambitious ones. 
 <br>3. We came together as a group to discuss our visualizations and picked three that we thought might be best for our objective and given our limitations.  We also identified Bokeh as both a powerful and straightforward platform to construct our visualization designs.
@@ -54,6 +54,8 @@ Attributes: Our Sankey visualization incorporates both categorical and quantitat
 <br>Interactivity: Users can hover over a specific band to get more information in a tooltip box, which displays the percentage of people in that technological savviness category that chose that specific response. Hovering also darkens the band and makes it pop out against the context of the rest. The user can use a drop-down menu to toggle the right side column from the future feeling responses to the considerations that participants prioritize when purchasing a new connected device. <br>
 <br>Perceptual Concepts: Our design leverages the perceptual mechanisms of both gists and Gestalt principles. By linking the size of bands with the percentage of respondents, users can make ensemble judgements about the data upon first glance. For example, they may be able to discern that a majority of respondents fell into two tech savviness categories: “Technically Savvy” and “Average User”. The Gestalt phenomena of similarity is present in our use of color categorization for each tech savviness level. This lends itself to the task of discovering how respondents of a specific tech savviness level answered the question represented in the right column. Users can easily see which color corresponds to the level they are interested in and hover over each band to get more information about specific responses.<br>
 <br>
+
+
 <h2>Map Visualization</h2>
 Attributes: The map visualization utilizes geospatial data to allow users to explore the potential relationships between technological savviness and feelings about the future of connectivity, as well as how those metrics vary across the globe. The primary data of focus of this visualization are participants’ responses to the question: “Thinking about a future in which so much of your world is connected to the internet leaves you feeling:” Countries are filled with a shade of orange illustrating the percent of the participants who responded that they were “scared as hell”. Those outliers with percentages above 20% were colored the same shade at 20% to maintain the visual contrast of the majority of the data range. An accompanying pie chart illustrates the ratio of all responses to this question for that country hovered over. This pie chart will display if there is a complete set of data provided for that country for that question. The five responses are illustrated as wedges of different colors, set from green as positive outlooks to red as fearful ones. The colors for technological savviness match those in the Sankey visualization. Additionally, the user can toggle the pie chart to display that country’s ratio of participants’ technological savviness categories. Technological savviness is an ordinal attribute, future feelings are categorical attributes, country is a geospatial attribute, and the number of participants and responses are quantitative attributes.<br>  
 <br>Interactivity: Hovering over a country will display the percentage of participants “scared as hell” and the country name. It will also update the pie chart, if sufficient data exist for that country. Hovering over a pie chart slice will show the number of participants in a tooltip box. Users can toggle the pie chart data to illustrate technological savviness categories or future feelings. This feature lets the user hover over countries of certain fear levels and see the breakdown of all of the responses, or the technological savviness profile of that country in the pie chart.<br>
