@@ -1,15 +1,19 @@
 ### README
-
-
-[Visualization 1](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/sankey/sankey-savviness.html)
-
-[Visualization 2](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
-
 <h2>Is Ignorance Bliss?: How technological savviness shapes feelings about a more connected future</h2>
-
+<br>
 <h2>Introduction</h2>
 In August 2017, Mozilla published a survey that aimed to take stock of the globe’s attitudes toward a more connected future. As more and more connected devices are invented, purchased, and added to the world-wide network, many different opinions, emotions and perspectives have arisen, especially concerning privacy and security. One interesting question is how technological savviness may influence feelings and attitudes toward a more connected future, or in other words: is ignorance bliss? <br>
+
 <br>This connection was the central focus of this investigation in which we designed two interactive visualizations to illustrate data from Mozilla’s survey, publically available on their website. These visual tools allow a user to explore insights into the ways fearful or excited feelings and technological savviness may be connected and how they vary across the globe.
+
+<br> Below you can find direct links to each of the visualizations:
+
+[Sankey Visualization](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/sankey/sankey-savviness.html)
+
+[World Map](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
+
+
+
 
 
 
