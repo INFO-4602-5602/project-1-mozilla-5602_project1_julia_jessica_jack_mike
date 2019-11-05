@@ -12,11 +12,6 @@ In August 2017, Mozilla published a survey that aimed to take stock of the globe
 
 [World Map](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
 
-
-
-
-
-
 <h2>Team Roles: </h2>
 Mike: Designer/coder<br>
 
