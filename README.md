@@ -7,7 +7,7 @@
 
 [Viz 2](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
 
-<h2>Is Ignorance Bliss?: How technological savviness shapes feelings about a more connected future</h2>
+<h3>Is Ignorance Bliss?: How technological savviness shapes feelings about a more connected future</h3>
 
 <h2>Introduction</h2>
 In August 2017, Mozilla published a survey that aimed to take stock of the globe’s attitudes toward a more connected future. As more and more connected devices are invented, purchased, and added to the world-wide network, many different opinions, emotions and perspectives have arisen, especially concerning privacy and security. One interesting question is how technological savviness may influence feelings and attitudes toward a more connected future, or in other words: is ignorance bliss? 
