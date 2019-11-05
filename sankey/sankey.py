@@ -90,4 +90,4 @@ dag_dict = {c:generateGraph(c) for c in choices}
 hmap = hv.HoloMap(dag_dict, kdims='Metric')
 
 # Save html file
-hv.save(hmap,'sankey.html')
+hv.save(hmap,'sankey-savviness.html')
