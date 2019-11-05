@@ -17,22 +17,23 @@ In August 2017, Mozilla published a survey that aimed to take stock of the globe
 Mike: Designer/coder<br>
 
 Jack: Designer/coder<br>
-Reorganized and reformatted dataset into more efficient format for parsing and generating plots
+Reorganized and reformatted dataset into more efficient format for parsing and generating plots.
 <br>Wrote code for holoviews Sankey plot, including custom Bokeh colormap and tooltip.
 <br>Produced several iterations of the Sankey plot.
 <br>Organized holoviews-generated html files to be hosted on github.io for ease of viewing.
 
 Jess: Designer/writer<br>
-Sketched three prototype visualizations
-<br>Modeled several iterations of maps with pie charts in Tableau
-<br>Wrote and edited content for Readme
-<br>Gave feedback on iterations of visualizations
+Sketched three prototype visualizations.
+<br>Modeled several iterations of maps with pie charts in Tableau.
+<br>Wrote and edited content for Readme.
+<br>Gave feedback on iterations of visualizations.
+<br>Coded formatting in Readme
 
 Julia: Designer/writer<br>
 Sketched out three prototype visualizations.
-<br>Modeled a map visualization in Tableau 
-<br>Gave feedback on iterations of visualizations
-<br>Wrote and edited content for Readme
+<br>Modeled a map visualization in Tableau.
+<br>Gave feedback on iterations of visualizations.
+<br>Wrote and edited content for Readme.
 
 
 
