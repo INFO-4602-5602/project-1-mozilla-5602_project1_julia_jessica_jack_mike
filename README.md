@@ -1,9 +1,9 @@
 ### README
 
 
-[Viz 1](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/sankey/sankey-savviness.html)
+[Visualization 1](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/sankey/sankey-savviness.html)
 
-[Viz 2](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
+[Visualization 2](http://info-4602-5602.github.io/project-1-mozilla-5602_project1_julia_jessica_jack_mike/map_n_pie/world-wide-feelings.html)
 
 <h2>Is Ignorance Bliss?: How technological savviness shapes feelings about a more connected future</h2>
 
