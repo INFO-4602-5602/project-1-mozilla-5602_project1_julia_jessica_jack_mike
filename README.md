@@ -10,27 +10,27 @@
 <h2>Is Ignorance Bliss?: How technological savviness shapes feelings about a more connected future</h2>
 
 <h2>Introduction</h2>
-In August 2017, Mozilla published a survey that aimed to take stock of the globe’s attitudes toward a more connected future. As more and more connected devices are invented, purchased, and added to the world-wide network, many different opinions, emotions and perspectives have arisen, especially concerning privacy and security. One interesting question is how technological savviness may influence feelings and attitudes toward a more connected future, or in other words: is ignorance bliss? 
-This connection was the central focus of this investigation in which we designed two interactive visualizations to illustrate data from Mozilla’s survey, publically available on their website. These visual tools allow a user to explore insights into the ways fearful or excited feelings and technological savviness may be connected and how they vary across the globe.
+In August 2017, Mozilla published a survey that aimed to take stock of the globe’s attitudes toward a more connected future. As more and more connected devices are invented, purchased, and added to the world-wide network, many different opinions, emotions and perspectives have arisen, especially concerning privacy and security. One interesting question is how technological savviness may influence feelings and attitudes toward a more connected future, or in other words: is ignorance bliss? <br>
+<br>This connection was the central focus of this investigation in which we designed two interactive visualizations to illustrate data from Mozilla’s survey, publically available on their website. These visual tools allow a user to explore insights into the ways fearful or excited feelings and technological savviness may be connected and how they vary across the globe.
 
 
 
 <h2>Team Roles: </h2>
-Mike: Designer/coder
+Mike: Designer/coder<br>
 
-Jack: Designer/coder
+Jack: Designer/coder<br>
 Reorganized and reformatted dataset into more efficient format for parsing and generating plots
 Wrote code for holoviews Sankey plot, including custom Bokeh colormap and tooltip.
 Produced several iterations of the Sankey plot.
 Organized holoviews-generated html files to be hosted on github.io for ease of viewing.
 
-Jess: Designer/writer
+Jess: Designer/writer<br>
 Sketched three prototype visualizations
 Modeled several iterations of maps with pie charts in Tableau
 Wrote and edited content for Readme
 Gave feedback on iterations of visualizations
 
-Julia: Designer/writer
+Julia: Designer/writer<br>
 Sketched out three prototype visualizations.
 Modeled a map visualization in Tableau 
 Gave feedback on iterations of visualizations
@@ -41,13 +41,13 @@ Wrote and edited content for Readme
 
 <h2>Design Process:</h2>
 1. After reviewing the dataset and article, we decided upon a research question: does someone’s technological savviness influence their feelings and attitudes towards the future of a connected world? We then identified some tasks that a potential user of the visualizations would use to explore this research question.
-2. We individually brainstormed two to three visualizations on paper, ranging from safe and realistic concepts to ambitious ones. 
-3. We came together as a group to discuss our visualizations and picked three that we thought might be best for our objective and given our limitations.  We also identified Bokeh as both a powerful and straightforward platform to construct our visualization designs.
-4. We prototyped these visualizations, with Jack working on a Sankey visualization, Mike working on a ridge plot, and Julia and Jess testing a variety of map visualizations in Tableau. 
-5. Discussing our prototypes, we decided to pursue the Sankey and map visualizations. We felt that both the Sankey plot and the map visualization provided for more interactivity than the ridge plot and therefore would generate more insights between multiple attributes. 
-6. Julia and Jess wrote out specific details describing the attributes and interactive features that needed to be represented in these two visualizations, and Jack and Mike worked on further developing the code for them in Bokeh. 
-7. We met to discuss progress on the visualizations and made adjustments to design elements. At this meeting we also continued to work on a more thorough written representation of what each visualization incorporates.
-8. Jack and Mike finalized the visualizations while Jess and Julia updated visualizations descriptions and other information to be included in the Readme document.
+<br>2. We individually brainstormed two to three visualizations on paper, ranging from safe and realistic concepts to ambitious ones. 
+<br>3. We came together as a group to discuss our visualizations and picked three that we thought might be best for our objective and given our limitations.  We also identified Bokeh as both a powerful and straightforward platform to construct our visualization designs.
+<br>4. We prototyped these visualizations, with Jack working on a Sankey visualization, Mike working on a ridge plot, and Julia and Jess testing a variety of map visualizations in Tableau. 
+<br>5. Discussing our prototypes, we decided to pursue the Sankey and map visualizations. We felt that both the Sankey plot and the map visualization provided for more interactivity than the ridge plot and therefore would generate more insights between multiple attributes. 
+<br>6. Julia and Jess wrote out specific details describing the attributes and interactive features that needed to be represented in these two visualizations, and Jack and Mike worked on further developing the code for them in Bokeh. 
+<br>7. We met to discuss progress on the visualizations and made adjustments to design elements. At this meeting we also continued to work on a more thorough written representation of what each visualization incorporates.
+<br>8. Jack and Mike finalized the visualizations while Jess and Julia updated visualizations descriptions and other information to be included in the Readme document.
 
 
 
