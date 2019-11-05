@@ -32,7 +32,7 @@ savvy_strs = {'1': 'Ultra Nerd',
 
 import pandas as pd
 # Load Survey data into Panas Dataframe
-surveyData = pd.read_csv('Survey_Results_Clean_UTF8.csv')
+surveyData = pd.read_csv('../Survey_Results_Clean_UTF8.csv')
 
 data_dict = {}
 for country in surveyData['Country or Region'].unique():
@@ -115,7 +115,7 @@ for ct in data_dict.keys():
     if ct == 'United States':
         bg = ['United States of America']
         new_data_dict[bg[0]] = new_data_dict.pop(ct)
-        
+
     if ct == bg[0]: # this is dumb I don't actually add any
         new_data_dict[bg[0]] = new_data_dict.pop(ct) # replace the medium data key with the new country key
     else:
@@ -140,7 +140,6 @@ for ct in savvy_dict.keys():
 from bokeh.models.widgets import Select
 select = Select(title="Metric:", value="Fear Level", options=["Fear Level","Tech Savviness"],width=300)
 
-
 ndf = pd.concat([df['entity'],df['code']],axis=1)
 ndf.drop_duplicates()
 
@@ -163,7 +162,7 @@ for v in range(len(new_data_dict.values())):
     except IndexError:
         new_data_dict.pop(entitiesL[v])
         pop_list.append(v)
-        
+
 ##        print(entitiesL[v],' fail')
         pass
 #######
@@ -220,7 +219,7 @@ singe_ramp_red = ['#a50f15','#de2d26','#fb6a4a','#fcae91','#fee5d9']
 single_ramp_grn = ['#006d2c', '#31a354','#74c476','#bae4b3']
 
 # doverging color ramp fear based color mapping
-diverging_ramp = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641'] 
+diverging_ramp = ['#d7191c','#fdae61','#ffffbf','#a6d96a','#1a9641']
 
 palette = singe_ramp_red
 ##palette = diverging_ramp
@@ -286,7 +285,7 @@ def pie_dat(data):
 
     ndata = {}
     for c in range(len(data.columns.to_list())):
-        ndata[data.columns[c]]=data[data.columns[c]].to_list()  
+        ndata[data.columns[c]]=data[data.columns[c]].to_list()
     return ndata
 
 # add pie data to the new_data_dict
@@ -304,7 +303,7 @@ for k in list(new_data_dict.keys()):
     try:
         if math.isnan(k): pop_list.append(k)
     except TypeError: pass
-        
+
 for k in pop_list:
     new_data_dict.pop(k)
 
@@ -346,7 +345,7 @@ def json_data(selectedYear):
         if math.isnan(r) or r == 0:
             merged.mode_fear_response[ii] = 'No data'
         ii += 1
-            
+
     inds = merged['country_code'].tolist()
     merged_json = json.loads(merged.to_json())    
     json_data = json.dumps(merged_json)
@@ -373,9 +372,8 @@ code="""
 
 """
 
-
 ##from bokeh.models import LabelSet
-#######pie 
+#######pie
 p3 = figure(plot_height=int(2*350/3), title="Pie Chart", toolbar_location=None,
            tools="hover", tooltips="@country: @value", x_range=(-0.5, 1.0))
 p3.min_border_right = 100
@@ -414,7 +412,7 @@ tick_labels = {'1': string_reps_abrev['1'], '2': string_reps_abrev['2'], '3':str
 hover = HoverTool(callback = hover_callback, tooltips = [ ('Country','@country'),('Mode response: ', '@mode_fear_response')])
 ##hover = HoverTool(tooltips = [ ('Country/region','@country'),('Mode response:', '@per_cent_obesity')])
 
-#Create color bar. 
+#Create color bar.
 color_bar = ColorBar(color_mapper=color_mapper, label_standoff=8,width = 500, height = 20,
                      border_line_color=None,location = (100,0), orientation = 'horizontal', major_label_overrides = tick_labels)
 
@@ -425,7 +423,7 @@ p = figure(title = 'Patterns of fear and know-how around the world', plot_height
 p.xgrid.grid_line_color = None
 p.ygrid.grid_line_color = None
 p.axis.visible=False
-#Add patch renderer to figure. 
+#Add patch renderer to figure.
 p.patches('xs','ys', source = geosource,fill_color = {'field' :'mode_fear_response', 'transform' : color_mapper},
           line_color = 'black', line_width = 0.25, fill_alpha = 1)
 
@@ -433,9 +431,6 @@ p.patches('xs','ys', source = geosource,fill_color = {'field' :'mode_fear_respon
 p.add_layout(color_bar, 'below')
 p.title.text_font_size = '14pt'
 
-
-
-    
 
 
 from bokeh.io import output_file, save, show
