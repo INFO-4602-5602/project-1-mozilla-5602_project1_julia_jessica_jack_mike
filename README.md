@@ -15,7 +15,8 @@ In August 2017, Mozilla published a survey that aimed to take stock of the globe
 <h2>Team Roles </h2>
 Mike: Designer/coder<br>
 
-Jack: Designer/coder<br>
+
+<br>Jack: Designer/coder<br>
 Reorganized and reformatted dataset into more efficient format for parsing and generating plots.
 <br>Wrote code for holoviews Sankey plot, including custom Bokeh colormap and tooltip.
 <br>Produced several iterations of the Sankey plot.
